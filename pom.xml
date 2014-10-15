@@ -26,6 +26,8 @@
     </modules>
 
     <properties>
+        <project.main.basedir>${project.basedir}</project.main.basedir>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetJdk>1.7</project.build.targetJdk>
         <project.build.jvmsize>1024m</project.build.jvmsize>
@@ -35,11 +37,13 @@
         <project.check.skip-dependency>${project.check.skip-all}</project.check.skip-dependency>
         <project.check.skip-dependency-version-check>${project.check.skip-all}</project.check.skip-dependency-version-check>
         <project.check.skip-findbugs>${project.check.skip-all}</project.check.skip-findbugs>
+        <project.check.skip-checkstyle>${project.check.skip-all}</project.check.skip-checkstyle>
 
         <project.check.fail-all>true</project.check.fail-all>
         <project.check.fail-dependency>${project.check.fail-all}</project.check.fail-dependency>
         <project.check.fail-dependency-version-check>${project.check.fail-all}</project.check.fail-dependency-version-check>
         <project.check.fail-findbugs>${project.check.fail-all}</project.check.fail-findbugs>
+        <project.check.fail-checkstyle>${project.check.fail-all}</project.check.fail-checkstyle>
     </properties>
 
     <dependencyManagement>
@@ -326,6 +330,27 @@
                         </execution>
                     </executions>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>2.11</version>
+                    <executions>
+                        <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <configuration>
+                                <skip>${project.check.skip-checkstyle}</skip>
+                                <failOnViolation>${project.check.fail-checkstyle}</failOnViolation>
+                                <consoleOutput>true</consoleOutput>
+                                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                                <configLocation>${project.main.basedir}/src/checkstyle/checks.xml</configLocation>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -387,6 +412,11 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

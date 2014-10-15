@@ -11,6 +11,10 @@
     <artifactId>quickload-standards</artifactId>
     <name>quickload-standards</name>
 
+    <properties>
+        <project.main.basedir>${project.parent.basedir}</project.main.basedir>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.quickload</groupId>

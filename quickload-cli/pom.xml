@@ -11,6 +11,10 @@
     <artifactId>quickload-cli</artifactId>
     <name>quickload-cli</name>
 
+    <properties>
+        <project.main.basedir>${project.parent.basedir}</project.main.basedir>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
